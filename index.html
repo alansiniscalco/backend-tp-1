@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos de Limpieza</title>
+</head>
+<body>
+    <h1>Lista de Productos de Limpieza</h1>
+    <div id="product-list"></div>
+
+    <script src="product-manager.js"></script>
+    <script>
+        const manager = new ProductManager();
+
+        // Agregar algunos productos de limpieza con sus atributos
+        manager.addProduct(new CleaningProduct(null, 'Limpiavidrios', 'Limpia cristales y superficies de vidrio', 8, 20, 'img/limpiavidrios', 'Limpieza'));
+        manager.addProduct(new CleaningProduct(null, 'Desinfectante', 'Desinfecta y elimina gérmenes', 12, 15, 'img/desinfectante.jpg', 'Limpieza'));
+        manager.addProduct(new CleaningProduct(null, 'Limpiador de Pisos', 'Limpia y da brillo a los pisos', 15, 10, 'img/limpiador_pisos.jpg', 'Limpieza'));
+        manager.addProduct(new CleaningProduct(null, 'Lavandina', 'Desinfectante a base de lavandina', 5, 30, 'img/lavandina.jpg', 'Limpieza'));
+        manager.addProduct(new CleaningProduct(null, 'Jabón', 'Jabón líquido multiusos', 3, 25, 'img/jabon.jpg', 'Limpieza'));
+
+        // Obtener todos los productos y mostrarlos en la página web
+        const productListDiv = document.getElementById("product-list");
+
+        const allProducts = manager.getAllProducts();
+        allProducts.forEach(product => {
+            if (product instanceof CleaningProduct) {
+                const productDiv = document.createElement("div");
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <p>Descripción: ${product.description}</p>
+                    <p>Precio: $${product.price}</p>
+                    <p>Stock: ${product.stock}</p>
+                    <p>Categoría: ${product.category}</p>
+                    <img src="${product.thumbnail}" alt="${product.name}" width="100">
+                    <hr>
+                `;
+                productListDiv.appendChild(productDiv);
+            }
+        });
+    </script>
+</body>
+</html>
